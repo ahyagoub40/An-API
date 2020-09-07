@@ -13,17 +13,6 @@ const router = app => {
       response.send(result.rows);
     });
   });
-  app.post('/users', (request, response) => {
-    const { name, email } = request.body;
-    pool.query(
-      'INSERT INTO users (name, email) VALUES ($1, $1)', [name, email],
-      (error) => {
-        if (error) {
-          throw error;
-        }
-        response.status(201).json({ status: 'success', message: 'user added' });
-      });
-  });
 };
 
 module.exports = router;
