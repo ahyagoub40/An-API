@@ -1,15 +1,5 @@
-// fake data
-const users = [{
-  id: 1,
-  name: "Richard Hendricks",
-  email: "richard@piedpiper.com",
-},
-{
-  id: 2,
-  name: "Bertram Gilfoyle",
-  email: "gilfoyle@piedpiper.com",
-},
-];
+// link to the mysql pool connection
+const pool = require('../db/config');
 
 // our routes
 const router = app => {
@@ -18,7 +8,21 @@ const router = app => {
     response.send({ message: 'Hello, Server' });
   });
   app.get('/users', (request, response) => {
-    response.send(users);
+    pool.query(`SELECT * FROM users`, (error, result) => {
+      if (error) throw error
+      response.send(result.rows);
+    });
+  });
+  app.post('/users', (request, response) => {
+    const { name, email } = request.body;
+    pool.query(
+      'INSERT INTO users (name, email) VALUES ($1, $1)', [name, email],
+      (error) => {
+        if (error) {
+          throw error;
+        }
+        response.status(201).json({ status: 'success', message: 'user added' });
+      });
   });
 };
 

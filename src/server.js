@@ -16,8 +16,7 @@ app.use(bodyParser.urlencoded({
 routes(app);
 
 // Start the server
-app.listen(port, (error) => {
+app.listen(process.env.PORT || port, (error) => {
   if (error) return console.log(`Error: ${error}`);
-
   console.log(`Server listening on port ${port} 👍`)
 });
