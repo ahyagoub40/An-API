@@ -9,7 +9,7 @@ const router = app => {
   app.get('/users', (request, response) => {
     pool.query(`SELECT * FROM users`, (error, result) => {
       if (error) throw error
-      response.send(result.rows);
+      response.status(200).json(results.rows);
     });
   });
 };
