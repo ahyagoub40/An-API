@@ -1,4 +1,3 @@
-// link to the mysql pool connection
 const pool = require('../db/config');
 
 // our routes
