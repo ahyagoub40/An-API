@@ -7,7 +7,7 @@ const router = app => {
     response.send({ message: 'Hello, Server' });
   });
   app.get('/users', (request, response) => {
-    pool.query(`SELECT * FROM users`, (error, result) => {
+    pool.query(`SELECT * FROM users`, (error, results) => {
       if (error) throw error
       response.status(200).json(results.rows);
     });
