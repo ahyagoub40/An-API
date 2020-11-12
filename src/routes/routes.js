@@ -1,7 +1,7 @@
-const pool = require('../db/config');
+import pool from '../db/config.js';
 
 // our routes
-const router = app => {
+export default function router(app) {
   app.get('/users', (request, response) => {
     pool.query(`SELECT * FROM users`, (error, results) => {
       if (error) throw error
@@ -9,5 +9,3 @@ const router = app => {
     });
   });
 };
-
-module.exports = router;

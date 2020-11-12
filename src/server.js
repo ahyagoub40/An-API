@@ -1,11 +1,11 @@
-// Require packages and set the port
+// Import packages and set the port
 
-const express = require('express');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const port = process.env.PORT || 3002;
-const routes = require('./routes/routes');
+import router from './routes/routes.js';
 
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // calling the routes function
-routes(app);
+router(app);
 
 // Start the server
 app.listen(port, (error) => {
